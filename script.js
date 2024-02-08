@@ -71,5 +71,21 @@ function getSelected(){
 
 
 submitBtn.addEventListner("click", () => {
-	
+	const answer = getSelected()	
+
+
+	if(answer){
+		if(answer === quizData[currentQuiz].correct){
+			score++
+		}
+
+		currentQuiz++
+
+		if(currentQuiz < quizData.length){
+			loadQuiz()
+		}
+		else{
+			alert("you finished the quiz and your score is" + score + "/" + quizData.length)
+		}
+	}
 })
