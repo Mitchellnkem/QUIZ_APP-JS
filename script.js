@@ -89,7 +89,7 @@ const a_text = document.getElementById("a_text")
 const b_text = document.getElementById("b_text")
 const c_text = document.getElementById("c_text")
 const d_text = document.getElementById("d_text")
-const submitBtn = dpcoment.getElementById("submit")
+const submitBtn = document.getElementById("submit")
 
 
 let currentQuiz = 0;
@@ -131,25 +131,78 @@ function getSelected(){
 }
 
 
-submitBtn.addEventListner("click", () => {
-	const answer = getSelected()	
+// submitBtn.addEventListner("click", () => {
+// 	const answer = getSelected()	
 
 
-	if(answer){
-		if(answer === quizData[currentQuiz].correct){
-			score++
-		}
+// 	if(answer){
+// 		if(answer == quizData[currentQuiz].correct){
+// 			score++
+// 		}
 
-		currentQuiz++
+// 		currentQuiz++
 
-		if(currentQuiz < quizData.length){
-			loadQuiz()
-		}
-		else{
-			alert("you finished the quiz and your score is" + score + "/" + quizData.length);
-			<button onClick="location.reload()">Reload</button>
-		}
-	}
-}) 
+// 		if(currentQuiz < quizData.length){
+// 			loadQuiz()
+// 		}
+// 		else{
+// 			alert("you finished the quiz and your score is" + score + "/" + quizData.length);
+// 			// <button onClick = "location.reload()">Reload</button>
+// 		}
+// 	}
+// }) 
 
+// submitBtn.addEventListener("click", () => {
+//     const answer = getSelected();
+
+//     if (answer) {
+//         if (answer == quizData[currentQuiz].correct) {
+//             score++;
+//         }
+
+//         currentQuiz++;
+
+//         if (currentQuiz < quizData.length) {
+//             loadQuiz();
+//         } else {
+//             alert("you finished the quiz and your score is " + score + "/" + quizData.length);
+//             // <button onClick="location.reload ()">Reload</button>
+//         }
+//     }
+// });
+
+
+submitBtn.addEventListener("click", () => {
+    const answer = getSelected();
+  
+    if (answer) {
+      if (answer == quizData[currentQuiz].correct) {
+        score++;
+      } else {
+        // If the answer is wrong, prompt the user and provide the correct answer
+        alert("Wrong answer! The correct answer is: " + quizData[currentQuiz].correct.toUpperCase());
+      }
+  
+      currentQuiz++;
+  
+      if (currentQuiz < quizData.length) {
+        loadQuiz();
+      } else {
+        let remark = "";
+        if (score >= 8) {
+          remark = "Excellent! You really know your stuff!";
+        } else if (score >= 5) {
+          remark = "Well done! You did a good job!";
+        } else {
+          remark = "Keep practicing! You'll get better!";
+        }
+  
+        quiz.innerHTML = <h2>You answered ${score} / ${quizData.length} questions correctly</h2>
+        // <button onclick="location.reload()">Reload</button>;
+      } 
+    }else {
+      // Print an informational message when no answer is selected
+      alert("Please select an answer before submitting.");
+    }
+  });
 
